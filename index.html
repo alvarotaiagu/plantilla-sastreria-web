@@ -133,7 +133,8 @@
         <path class="ch-solapa" d="M182 48L151 236L184 140L194 66Z"></path>
         <path class="ch-cuello" d="M118 48L182 48L176 26L124 26Z"></path>
         <path class="ch-costura" d="M100 152L136 146"></path>
-        <path class="ch-costura" d="M164 200L200 196"></path>
+        <path class="ch-costura" d="M94 288L130 284"></path>
+        <path class="ch-costura" d="M170 284L206 288"></path>
         <circle class="ch-boton" cx="150" cy="230" r="4.6"></circle>
       </svg>
       <figcaption>El derecho. Aquí no hay nada que mirar: todas las chaquetas se parecen por fuera.</figcaption>
@@ -166,7 +167,8 @@
               <path class="ch-solapa" d="M182 48L151 236L184 140L194 66Z"></path>
               <path class="ch-cuello" d="M118 48L182 48L176 26L124 26Z"></path>
               <path class="ch-costura" d="M100 152L136 146"></path>
-              <path class="ch-costura" d="M164 200L200 196"></path>
+              <path class="ch-costura" d="M94 288L130 284"></path>
+              <path class="ch-costura" d="M170 284L206 288"></path>
               <circle class="ch-boton" cx="150" cy="230" r="4.6"></circle>
             </svg>
 
@@ -178,47 +180,50 @@
                 </pattern>
               </defs>
 
+              <!-- detrás de la abertura del delantero se ve el otro lado, en sombra -->
+              <path class="ch-sombra" d="M118 48L88 56C82 150 78 270 76 382L224 382C222 270 218 150 212 56L182 48Z"></path>
+
               <path class="ch-manga ch-manga--forro" d="M88 56C62 76 50 190 48 368L76 382C78 270 82 150 88 56Z"></path>
               <path class="ch-manga ch-manga--forro" d="M212 56C238 76 250 190 252 368L224 382C222 270 218 150 212 56Z"></path>
               <path class="ch-forro" d="M118 48L88 56C82 150 78 270 76 382L136 382L146 240L154 240L164 382L224 382C222 270 218 150 212 56L182 48L151 236L149 236Z"></path>
 
-              <!-- 1 · entretela de pecho -->
+              <!-- 1 · entretela de pecho, dentro de cada panel -->
               <g class="pieza pieza--1">
-                <path class="ch-entretela" d="M104 70L146 62L150 232L132 236L112 190Z"></path>
-                <path class="ch-entretela" d="M196 70L154 62L150 232L168 236L188 190Z"></path>
+                <path class="ch-entretela" d="M96 70L118 56L140 190L126 226L104 172Z"></path>
+                <path class="ch-entretela" d="M204 70L182 56L160 190L174 226L196 172Z"></path>
               </g>
-              <!-- 2 · hombrera -->
+              <!-- 2 · hombrera, siguiendo la línea del hombro -->
               <g class="pieza pieza--2">
-                <path class="ch-hombrera" d="M92 58C108 46 126 44 140 48"></path>
-                <path class="ch-hombrera" d="M208 58C192 46 174 44 160 48"></path>
+                <path class="ch-hombrera" d="M90 58C100 48 110 46 118 48"></path>
+                <path class="ch-hombrera" d="M210 58C200 48 190 46 182 48"></path>
               </g>
-              <!-- 3 · sisa, la costura de la manga -->
+              <!-- 3 · sisa, la costura por donde se monta la manga -->
               <g class="pieza pieza--3">
-                <path class="ch-sisa" d="M92 58C104 96 102 160 96 200"></path>
-                <path class="ch-sisa" d="M208 58C196 96 198 160 204 200"></path>
+                <path class="ch-sisa" d="M90 58C102 96 100 160 94 210"></path>
+                <path class="ch-sisa" d="M210 58C198 96 200 160 206 210"></path>
               </g>
-              <!-- 4 · bolsillo interior -->
+              <!-- 4 · bolsillo interior, por debajo de la entretela -->
               <g class="pieza pieza--4">
-                <path class="ch-bolsillo" d="M104 146L138 140L139 150L105 156Z"></path>
-                <path class="ch-pespunte" d="M106 158L138 152"></path>
+                <path class="ch-bolsillo" d="M98 208L130 202L131 212L99 218Z"></path>
+                <path class="ch-pespunte" d="M100 220L130 214"></path>
               </g>
-              <!-- 5 · ojal a mano en la solapa -->
+              <!-- 5 · el revés del ojal de la solapa -->
               <g class="pieza pieza--5">
-                <path class="ch-ojal" d="M176 80L190 72"></path>
-                <circle class="ch-ojal-ojo" cx="176" cy="81" r="2.6"></circle>
+                <path class="ch-ojal" d="M160 102L172 96"></path>
+                <circle class="ch-ojal-ojo" cx="160" cy="103" r="2.8"></circle>
               </g>
-              <!-- 6 · el bajo, cosido a mano -->
+              <!-- 6 · el bajo, con el forro cosido a mano -->
               <g class="pieza pieza--6">
-                <path class="ch-bajo" d="M78 368L136 368M164 368L222 368"></path>
+                <path class="ch-bajo" d="M80 366L134 366M166 366L220 366"></path>
               </g>
 
               <g class="ch-numeros">
-                <g class="num num--1"><circle cx="126" cy="112" r="11"></circle><text x="126" y="116">1</text></g>
-                <g class="num num--2"><circle cx="112" cy="54" r="11"></circle><text x="112" y="58">2</text></g>
-                <g class="num num--3"><circle cx="212" cy="140" r="11"></circle><text x="212" y="144">3</text></g>
-                <g class="num num--4"><circle cx="90" cy="176" r="11"></circle><text x="90" y="180">4</text></g>
-                <g class="num num--5"><circle cx="204" cy="66" r="11"></circle><text x="204" y="70">5</text></g>
-                <g class="num num--6"><circle cx="104" cy="390" r="11"></circle><text x="104" y="394">6</text></g>
+                <g class="num num--1"><circle cx="116" cy="120" r="12"></circle><text x="116" y="124">1</text></g>
+                <g class="num num--2"><circle cx="100" cy="32" r="12"></circle><text x="100" y="36">2</text></g>
+                <g class="num num--3"><circle cx="236" cy="158" r="12"></circle><text x="236" y="162">3</text></g>
+                <g class="num num--4"><circle cx="60" cy="214" r="12"></circle><text x="60" y="218">4</text></g>
+                <g class="num num--5"><circle cx="196" cy="96" r="12"></circle><text x="196" y="100">5</text></g>
+                <g class="num num--6"><circle cx="104" cy="398" r="12"></circle><text x="104" y="402">6</text></g>
               </g>
             </svg>
           </div>

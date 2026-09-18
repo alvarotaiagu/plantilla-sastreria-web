@@ -219,12 +219,13 @@ html.has-motion .hero__titular .letra, html.has-motion .titular .letra { transfo
 .chaqueta--hero { width: min(100%, 320px); height: auto; }
 
 /* el revés */
+.ch-sombra { fill: #1f1a17; }   /* lo que se ve por el hueco del delantero */
 .ch-forro { fill: var(--forro); stroke: var(--tinta); stroke-width: 2.4; stroke-linejoin: round; }
 .ch-manga--forro { fill: var(--forro); stroke: var(--tinta); stroke-width: 2.4; }
 .ch-entretela { fill: url(#tramaEntretela); stroke: var(--crema); stroke-width: 1.6; }
 .ch-hombrera { fill: none; stroke: var(--crema); stroke-width: 6; stroke-linecap: round; }
 .ch-sisa { fill: none; stroke: var(--crema-suave); stroke-width: 2; stroke-dasharray: 7 6; }
-.ch-bolsillo { fill: var(--tinta); }
+.ch-bolsillo { fill: #22201d; stroke: var(--crema-suave); stroke-width: 1.6; }
 .ch-pespunte { stroke: var(--crema-suave); stroke-width: 1.6; stroke-dasharray: 5 4; }
 .ch-ojal { stroke: var(--burdeos-claro); stroke-width: 4; stroke-linecap: round; }
 .ch-ojal-ojo { fill: none; stroke: var(--burdeos-claro); stroke-width: 2; }

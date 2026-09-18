@@ -1,0 +1,29 @@
+{
+  "errores": [
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED"
+  ],
+  "fallos": [
+    "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js :: net::ERR_FAILED",
+    "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js :: net::ERR_FAILED",
+    "https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js :: net::ERR_FAILED"
+  ],
+  "pruebas": {
+    "estado": "Cerrado ahora · abre hoy a las 10:00",
+    "cuadrosHoras": "60 cuadrados en 9 tareas",
+    "piezas": "6 piezas · 6 grupos dibujados · 6 números",
+    "caraInicial": "volteada:false · derecho aria-hidden:false · revés aria-hidden:true",
+    "girarAlReves": "volteada:true · transform:matrix3d(-1, 0, 0, 0, 0, 1, 0, · botón revés:true · estado:Estás viendo el revés. Los  →  volteada:true · transform:matrix3d(-1, 0, 0, 0, 0, 1, 0, · botón revés:true · estado:Estás viendo el revés. Los",
+    "senalarPieza": "activa dibujo:ninguna · fila activa:ninguna  →  activa dibujo:4 · fila activa:4",
+    "volverAlDerecho": "volteada:true · botón derecho:false · revés aria-hidden:false  →  volteada:false · botón derecho:true · revés aria-hidden:true",
+    "horas": "visible:true · cuadrados:9 · escala del primero:matrix(1, 0, 0, 1, 0, 0)  →  visible:true · cuadrados:9 · escala del primero:matrix(1, 0, 0, 1, 0, 0)",
+    "cookiesVisible": true,
+    "cookiesCerrado": true,
+    "mapaIframe": 1,
+    "menu": "true -> false",
+    "sinGsap": "has-motion:false · cortina:none · titular:Lo que se ve de una chaque · cuadrados:60 · foto clip:inset(0px) · contador:60 · estado:Cerrado ahora · abre hoy a las || tras pulsar El revés: volteada=true",
+    "reduce": "has-motion:true · cortina:none · volteada:true · transform:matrix3d(-1, 0, 0, 0, 0, 1, 0, · cuadrados:60 · escala del primero:matrix(1, 0, 0, 1, 0, 0)"
+  },
+  "longtask": "51"
+}
