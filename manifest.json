@@ -1,0 +1,13 @@
+{
+  "name": "Sastrería Arume · traje a medida (demostración)",
+  "short_name": "Sastrería Arume",
+  "description": "Plantilla de demostración para una sastrería a medida. Negocio ficticio.",
+  "lang": "es",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#efe9e1",
+  "theme_color": "#efe9e1",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

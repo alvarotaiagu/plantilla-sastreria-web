@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  SITIO DE DEMOSTRACIÓN — Sastrería Arume es un taller FICTICIO.
+  Nombre, dirección, teléfonos, personas, precios, plazos y
+  opiniones son de muestra y no corresponden a ninguna
+  sastrería real.
+  No se inventa ninguna titulación, ni escuela, ni premio, ni
+  paso por ningún taller con nombre: el aviso legal explica
+  cuál es el dato que iría en ese hueco.
+  ============================================================
+-->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Sastrería Arume · Traje a medida en Betanzos</title>
+<meta name="description" content="Lo que se ve de una chaqueta es la mitad. Sastrería a medida en Betanzos: entretela, forro y ojales a mano. Sitio de demostración: negocio ficticio.">
+<meta name="theme-color" content="#efe9e1">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.json">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sastrería Arume · Traje a medida en Betanzos">
+<meta property="og:description" content="Lo que se ve de una chaqueta es la mitad. La otra mitad está por dentro. Taller ficticio de demostración.">
+<meta property="og:image" content="assets/og.png">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..600&family=Inter+Tight:ital,wght@0,300..700;1,300..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/estilo.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ClothingStore",
+  "name": "Sastrería Arume",
+  "description": "Sastrería a medida con taller propio. Negocio ficticio de demostración.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Rúa dos Ferreiros, 9",
+    "postalCode": "15300",
+    "addressLocality": "Betanzos",
+    "addressRegion": "A Coruña",
+    "addressCountry": "ES"
+  },
+  "telephone": "+34 981 00 00 31",
+  "email": "taller@sastreriaarume.example",
+  "priceRange": "320 € – 2100 €",
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday"], "opens": "10:00", "closes": "14:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday"], "opens": "16:30", "closes": "20:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday"], "opens": "10:00", "closes": "13:30" }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="cortina" id="cortina" aria-hidden="true">
+  <div class="cortina__caja">
+    <svg class="cortina__aguja" viewBox="0 0 160 120" role="presentation" focusable="false">
+      <path class="cortina__hilo" d="M6 96c26 8 40-22 62-18s24 30 46 22 34-34 40-44" pathLength="1"></path>
+      <g class="cortina__punta">
+        <path d="M112 62 L146 26" stroke-linecap="round"></path>
+        <circle cx="145" cy="27" r="3.4" fill="none"></circle>
+      </g>
+    </svg>
+    <span class="cortina__palabra">el revés</span>
+  </div>
+  <svg class="cortina__costura" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path d="M0 6 C300 54 900 54 1200 6"></path>
+  </svg>
+</div>
+
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+
+<header class="cabecera" id="cabecera">
+  <a class="marca" href="#inicio" aria-label="Sastrería Arume, inicio">
+    <svg class="marca__icono" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+      <path d="M6 32 L30 8" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"></path>
+      <circle cx="30" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2.2"></circle>
+      <path d="M8 22c6 4 10-2 16 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="3 3"></path>
+    </svg>
+    <span class="marca__texto">
+      <span class="marca__nombre">Sastrería Arume</span>
+      <span class="marca__bajada">a medida · Betanzos</span>
+    </span>
+  </a>
+
+  <nav class="nav" id="nav" aria-label="Navegación principal">
+    <ul class="nav__lista">
+      <li><a href="#reves">El revés</a></li>
+      <li><a href="#horas">Sesenta horas</a></li>
+      <li><a href="#pruebas">Las pruebas</a></li>
+      <li><a href="#precios">Precios</a></li>
+      <li><a href="#taller">El taller</a></li>
+    </ul>
+    <a class="boton boton--burdeos magnetico" href="#taller">Pedir cita</a>
+  </nav>
+
+  <button class="hamburguesa" id="hamburguesa" type="button" aria-expanded="false" aria-controls="nav" aria-label="Abrir el menú">
+    <span class="hamburguesa__caja" aria-hidden="true"><i></i><i></i></span>
+    <span class="hamburguesa__texto">Menú</span>
+  </button>
+</header>
+
+<main id="contenido">
+
+  <!-- ============ 01 · HERO ============ -->
+  <section class="hero" id="inicio">
+    <div class="hero__texto">
+      <p class="hero__sobre">Betanzos, A Coruña · taller propio · desde 2006</p>
+      <h1 class="hero__titular" data-reveal>Lo que se ve de una chaqueta es la mitad</h1>
+      <p class="hero__entrada">La otra mitad está por dentro: la entretela que le da forma al pecho, la hombrera que no se nota, el forro cosido a mano en el bajo. Eso es lo que decide cómo cae una chaqueta a los cinco años, y es exactamente lo que no se ve al probártela.</p>
+      <div class="hero__acciones">
+        <a class="boton boton--burdeos magnetico" href="#reves">Dale la vuelta</a>
+        <a class="boton boton--linea magnetico" href="#precios">Precios y plazos</a>
+      </div>
+      <dl class="hero__datos">
+        <div><dt>Horas por chaqueta</dt><dd><span class="contador" data-hasta="60">60</span></dd></div>
+        <div><dt>Medidas que se toman</dt><dd><span class="contador" data-hasta="22">22</span></dd></div>
+        <div><dt>Pruebas</dt><dd><span class="contador" data-hasta="3">3</span></dd></div>
+      </dl>
+    </div>
+
+    <figure class="hero__prenda">
+      <svg class="chaqueta chaqueta--hero" viewBox="0 0 300 420" role="img" aria-label="Dibujo del derecho de una chaqueta de sastre, con solapas, un botón y bolsillo de pecho">
+        <path class="ch-manga" d="M88 56C62 76 50 190 48 368L76 382C78 270 82 150 88 56Z"></path>
+        <path class="ch-manga" d="M212 56C238 76 250 190 252 368L224 382C222 270 218 150 212 56Z"></path>
+        <path class="ch-cuerpo" d="M118 48L88 56C82 150 78 270 76 382L136 382L146 240L154 240L164 382L224 382C222 270 218 150 212 56L182 48L151 236L149 236Z"></path>
+        <path class="ch-solapa" d="M118 48L149 236L116 140L106 66Z"></path>
+        <path class="ch-solapa" d="M182 48L151 236L184 140L194 66Z"></path>
+        <path class="ch-cuello" d="M118 48L182 48L176 26L124 26Z"></path>
+        <path class="ch-costura" d="M100 152L136 146"></path>
+        <path class="ch-costura" d="M164 200L200 196"></path>
+        <circle class="ch-boton" cx="150" cy="230" r="4.6"></circle>
+      </svg>
+      <figcaption>El derecho. Aquí no hay nada que mirar: todas las chaquetas se parecen por fuera.</figcaption>
+    </figure>
+  </section>
+
+  <div class="cinta" aria-hidden="true">
+    <div class="cinta__pista" id="cintaPista">
+      <span>entretela cosida, no pegada</span><i>·</i><span>ojales a mano</span><i>·</i>
+      <span>tres pruebas</span><i>·</i><span>lana de tejeduría europea</span><i>·</i>
+      <span>arreglos de por vida</span><i>·</i>
+    </div>
+  </div>
+
+  <!-- ============ 02 · EL REVÉS (protagonista) ============ -->
+  <section class="reves seccion" id="reves">
+    <p class="seccion__indice"><span>01</span> El revés</p>
+    <h2 class="titular titular--grande" data-reveal>Dale la vuelta a la chaqueta</h2>
+    <p class="reves__entrada">Esta es la misma chaqueta del principio, girada. Lo de dentro no se enseña nunca y es lo único que distingue una chaqueta a medida de una comprada: si le quitas esto, por fuera sigue igual durante seis meses.</p>
+
+    <div class="reves__caja">
+      <div class="reves__prenda">
+        <div class="chaqueta-giro" id="chaquetaGiro">
+          <div class="chaqueta-giro__eje">
+            <svg class="chaqueta chaqueta--cara chaqueta--derecho" viewBox="0 0 300 420" role="img" aria-label="El derecho de la chaqueta: solapas, un botón y bolsillo de pecho">
+              <path class="ch-manga" d="M88 56C62 76 50 190 48 368L76 382C78 270 82 150 88 56Z"></path>
+              <path class="ch-manga" d="M212 56C238 76 250 190 252 368L224 382C222 270 218 150 212 56Z"></path>
+              <path class="ch-cuerpo" d="M118 48L88 56C82 150 78 270 76 382L136 382L146 240L154 240L164 382L224 382C222 270 218 150 212 56L182 48L151 236L149 236Z"></path>
+              <path class="ch-solapa" d="M118 48L149 236L116 140L106 66Z"></path>
+              <path class="ch-solapa" d="M182 48L151 236L184 140L194 66Z"></path>
+              <path class="ch-cuello" d="M118 48L182 48L176 26L124 26Z"></path>
+              <path class="ch-costura" d="M100 152L136 146"></path>
+              <path class="ch-costura" d="M164 200L200 196"></path>
+              <circle class="ch-boton" cx="150" cy="230" r="4.6"></circle>
+            </svg>
+
+            <svg class="chaqueta chaqueta--cara chaqueta--reves" viewBox="0 0 300 420" role="img" aria-labelledby="revesTitulo">
+              <title id="revesTitulo">El revés de la misma chaqueta: entretela, hombrera, forro, bolsillo interior, ojal a mano y costura del bajo</title>
+              <defs>
+                <pattern id="tramaEntretela" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(38)">
+                  <line x1="0" y1="0" x2="0" y2="8" stroke="currentColor" stroke-width="1.1"></line>
+                </pattern>
+              </defs>
+
+              <path class="ch-manga ch-manga--forro" d="M88 56C62 76 50 190 48 368L76 382C78 270 82 150 88 56Z"></path>
+              <path class="ch-manga ch-manga--forro" d="M212 56C238 76 250 190 252 368L224 382C222 270 218 150 212 56Z"></path>
+              <path class="ch-forro" d="M118 48L88 56C82 150 78 270 76 382L136 382L146 240L154 240L164 382L224 382C222 270 218 150 212 56L182 48L151 236L149 236Z"></path>
+
+              <!-- 1 · entretela de pecho -->
+              <g class="pieza pieza--1">
+                <path class="ch-entretela" d="M104 70L146 62L150 232L132 236L112 190Z"></path>
+                <path class="ch-entretela" d="M196 70L154 62L150 232L168 236L188 190Z"></path>
+              </g>
+              <!-- 2 · hombrera -->
+              <g class="pieza pieza--2">
+                <path class="ch-hombrera" d="M92 58C108 46 126 44 140 48"></path>
+                <path class="ch-hombrera" d="M208 58C192 46 174 44 160 48"></path>
+              </g>
+              <!-- 3 · sisa, la costura de la manga -->
+              <g class="pieza pieza--3">
+                <path class="ch-sisa" d="M92 58C104 96 102 160 96 200"></path>
+                <path class="ch-sisa" d="M208 58C196 96 198 160 204 200"></path>
+              </g>
+              <!-- 4 · bolsillo interior -->
+              <g class="pieza pieza--4">
+                <path class="ch-bolsillo" d="M104 146L138 140L139 150L105 156Z"></path>
+                <path class="ch-pespunte" d="M106 158L138 152"></path>
+              </g>
+              <!-- 5 · ojal a mano en la solapa -->
+              <g class="pieza pieza--5">
+                <path class="ch-ojal" d="M176 80L190 72"></path>
+                <circle class="ch-ojal-ojo" cx="176" cy="81" r="2.6"></circle>
+              </g>
+              <!-- 6 · el bajo, cosido a mano -->
+              <g class="pieza pieza--6">
+                <path class="ch-bajo" d="M78 368L136 368M164 368L222 368"></path>
+              </g>
+
+              <g class="ch-numeros">
+                <g class="num num--1"><circle cx="126" cy="112" r="11"></circle><text x="126" y="116">1</text></g>
+                <g class="num num--2"><circle cx="112" cy="54" r="11"></circle><text x="112" y="58">2</text></g>
+                <g class="num num--3"><circle cx="212" cy="140" r="11"></circle><text x="212" y="144">3</text></g>
+                <g class="num num--4"><circle cx="90" cy="176" r="11"></circle><text x="90" y="180">4</text></g>
+                <g class="num num--5"><circle cx="204" cy="66" r="11"></circle><text x="204" y="70">5</text></g>
+                <g class="num num--6"><circle cx="104" cy="390" r="11"></circle><text x="104" y="394">6</text></g>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <div class="reves__mando">
+          <button class="reves__boton" type="button" id="verDerecho" aria-pressed="true">El derecho</button>
+          <button class="reves__boton" type="button" id="verReves" aria-pressed="false">El revés</button>
+        </div>
+      </div>
+
+      <div class="reves__ficha">
+        <p class="reves__estado" id="revesEstado">Estás viendo <b>el derecho</b>. Gírala para ver por dónde se sostiene.</p>
+        <ol class="piezas" id="piezas">
+          <li data-pieza="1">
+            <b><span class="piezas__num">1</span> Entretela de pecho</b>
+            <span>Pelo de camello y crin, <strong>cosida con puntada de pique</strong>, no pegada con plancha. Es lo que hace que la solapa vuelva a su sitio sola y lo que se despega en una chaqueta barata a los dos inviernos.</span>
+          </li>
+          <li data-pieza="2">
+            <b><span class="piezas__num">2</span> Hombrera</b>
+            <span>Cuatro milímetros de guata, moldeada a mano sobre el hombro concreto de cada persona. Si se nota que la llevas, está mal puesta.</span>
+          </li>
+          <li data-pieza="3">
+            <b><span class="piezas__num">3</span> Sisa y cabeza de manga</b>
+            <span>La sisa se monta alta y pequeña para poder levantar el brazo sin que suba toda la chaqueta. Es la costura que más tiempo lleva y la que más se nota al moverse.</span>
+          </li>
+          <li data-pieza="4">
+            <b><span class="piezas__num">4</span> Bolsillo interior</b>
+            <span>Ribeteado y rematado a mano, con la etiqueta cosida dentro: nombre, fecha y número de encargo. Sirve para los arreglos de dentro de diez años.</span>
+          </li>
+          <li data-pieza="5">
+            <b><span class="piezas__num">5</span> Ojal de la solapa</b>
+            <span>Hecho a mano con seda, en unos cuarenta minutos. Una máquina lo hace en veinte segundos y se distingue a un metro.</span>
+          </li>
+          <li data-pieza="6">
+            <b><span class="piezas__num">6</span> El bajo y el forro</b>
+            <span>El forro va cosido a mano en el bajo, con holgura, para que la lana se mueva por dentro y no tire. Es lo que permite sacar o meter el largo sin rehacer nada.</span>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 · SESENTA HORAS ============ -->
+  <section class="horas" id="horas">
+    <div class="seccion">
+      <p class="seccion__indice"><span>02</span> Sesenta horas</p>
+      <h2 class="titular" data-reveal>En qué se van sesenta horas</h2>
+      <p class="horas__entrada">Un traje a medida cuesta lo que cuesta porque son sesenta horas de taller repartidas en unas ocho semanas. Cada cuadrado es una hora. No hay ninguna manera de que sean quince.</p>
+
+      <ul class="tareas" id="tareas">
+        <li style="--horas:6"><b>Patrón y corte</b><span class="cuadros" aria-hidden="true"></span><em>6 h</em></li>
+        <li style="--horas:9"><b>Entretela de pecho</b><span class="cuadros" aria-hidden="true"></span><em>9 h</em></li>
+        <li style="--horas:6"><b>Hombros y cuello</b><span class="cuadros" aria-hidden="true"></span><em>6 h</em></li>
+        <li style="--horas:8"><b>Mangas y sisas</b><span class="cuadros" aria-hidden="true"></span><em>8 h</em></li>
+        <li style="--horas:5"><b>Ojales a mano</b><span class="cuadros" aria-hidden="true"></span><em>5 h</em></li>
+        <li style="--horas:7"><b>Forro y bolsillos</b><span class="cuadros" aria-hidden="true"></span><em>7 h</em></li>
+        <li style="--horas:8"><b>Las tres pruebas</b><span class="cuadros" aria-hidden="true"></span><em>8 h</em></li>
+        <li style="--horas:5"><b>Pantalón</b><span class="cuadros" aria-hidden="true"></span><em>5 h</em></li>
+        <li style="--horas:6"><b>Planchado y remate</b><span class="cuadros" aria-hidden="true"></span><em>6 h</em></li>
+      </ul>
+      <p class="horas__total"><span class="contador" data-hasta="60">60</span> horas en total, de las cuales <strong>veintiséis se hacen a mano</strong>.</p>
+    </div>
+  </section>
+
+  <!-- ============ 04 · LAS TRES PRUEBAS ============ -->
+  <section class="pruebas seccion" id="pruebas">
+    <p class="seccion__indice"><span>03</span> Las pruebas</p>
+    <div class="pruebas__rejilla">
+      <div>
+        <h2 class="titular" data-reveal>Tres veces delante del espejo</h2>
+        <ol class="pruebas__lista">
+          <li>
+            <span class="pruebas__num">Semana 2</span>
+            <b>Prueba de baste</b>
+            <p>La chaqueta llega hilvanada con hilo blanco y sin mangas puestas. Da miedo verla, y es la prueba que más cambia: aquí se mueve el equilibrio, se sube o se baja el cuello y se decide el largo.</p>
+          </li>
+          <li>
+            <span class="pruebas__num">Semana 5</span>
+            <b>Prueba de forma</b>
+            <p>Ya tiene mangas, entretela y bolsillos marcados. Se afina la sisa, se ajusta la cintura y se mira cómo cae con los brazos en movimiento, no de pie y quieto.</p>
+          </li>
+          <li>
+            <span class="pruebas__num">Semana 8</span>
+            <b>Prueba final</b>
+            <p>Forro cosido, ojales hechos y botones puestos. Aquí solo se corrigen milímetros. Si en esta prueba hay que cambiar algo grande, es que falló la primera.</p>
+          </li>
+        </ol>
+        <p class="pruebas__nota">Si vives lejos, las tres pruebas se pueden juntar en dos viajes, pero el resultado no es el mismo y conviene decirlo antes de empezar, no después.</p>
+      </div>
+      <figure class="pruebas__foto" data-mascara data-cursor="Foto de archivo">
+        <img src="assets/fotos/prueba-1600.jpg" srcset="assets/fotos/prueba-800.jpg 800w, assets/fotos/prueba-1600.jpg 1600w" sizes="(max-width: 900px) 92vw, 42vw" width="1600" height="1067" loading="lazy" alt="Un sastre ajusta un chaleco sobre un cliente durante una prueba">
+        <figcaption>Foto de archivo.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ 05 · QUÉ SE HACE Y QUÉ NO ============ -->
+  <section class="claro" id="claro">
+    <div class="seccion">
+      <p class="seccion__indice"><span>04</span> Sin rodeos</p>
+      <div class="claro__rejilla">
+        <div>
+          <h2 class="titular" data-reveal>Qué se hace aquí y qué no</h2>
+          <p class="claro__fuerte">En este oficio hay tres palabras que se usan como si fueran la misma —a medida, semi-medida y confección— y la diferencia son miles de euros. Aquí está escrito cuál se hace.</p>
+          <ul class="claro__lista">
+            <li><b>Sí: traje a medida con patrón propio</b><span>Se corta un patrón para ti, desde cero, y se hace en el taller de arriba. Ocho semanas y tres pruebas.</span></li>
+            <li><b>Sí: semi-medida, y se dice que lo es</b><span>Se parte de un patrón base y se adapta. Cuesta bastante menos, tarda cuatro semanas y lleva una sola prueba. No se vende como a medida.</span></li>
+            <li><b>No: trajes en cuarenta y ocho horas</b><span>No existen. Lo que se entrega en dos días es una prenda de talla con el bajo cogido.</span></li>
+            <li><b>No: títulos ni escuelas que no se puedan comprobar</b><span>En esta plantilla de demostración no se cuelga ningún diploma, ningún premio ni ningún taller famoso por el que se haya pasado. El aviso legal explica qué iría en ese hueco en un caso real.</span></li>
+            <li><b>No: fotos de trabajos que no son nuestros</b><span>Las tres fotografías de esta página son de archivo y lo dicen en su pie. Un sastre de verdad pondría aquí las suyas.</span></li>
+          </ul>
+        </div>
+        <figure class="claro__foto" data-mascara data-cursor="Foto de archivo">
+          <img src="assets/fotos/sastre-1600.jpg" srcset="assets/fotos/sastre-800.jpg 800w, assets/fotos/sastre-1600.jpg 1600w" sizes="(max-width: 900px) 92vw, 38vw" width="1600" height="2131" loading="lazy" alt="Un sastre trabajando sobre tela azul en su mesa de taller">
+          <figcaption>Foto de archivo.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 06 · PRECIOS ============ -->
+  <section class="precios seccion" id="precios">
+    <p class="seccion__indice"><span>05</span> Precios</p>
+    <div class="precios__rejilla">
+      <div>
+        <h2 class="titular" data-reveal>Lo que cuesta y lo que tarda</h2>
+        <table class="tabla">
+          <caption class="visualmente-oculto">Prendas, plazos y precios</caption>
+          <thead><tr><th scope="col">Prenda</th><th scope="col">Plazo</th><th scope="col">Desde</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Traje a medida, dos piezas</th><td>8 semanas · 3 pruebas</td><td>1650 €</td></tr>
+            <tr><th scope="row">Traje a medida, tres piezas</th><td>9 semanas · 3 pruebas</td><td>2100 €</td></tr>
+            <tr><th scope="row">Chaqueta sola</th><td>7 semanas · 3 pruebas</td><td>1150 €</td></tr>
+            <tr><th scope="row">Traje de semi-medida</th><td>4 semanas · 1 prueba</td><td>790 €</td></tr>
+            <tr><th scope="row">Pantalón</th><td>3 semanas · 1 prueba</td><td>320 €</td></tr>
+            <tr><th scope="row">Camisa a medida</th><td>4 semanas · 1 prueba</td><td>140 €</td></tr>
+          </tbody>
+        </table>
+        <p class="precios__nota">Precios de muestra para esta demostración. «Desde» quiere decir con las lanas de entrada: un tejido de más precio sube el total entre 200 y 900 €, y se dice antes de cortar, no al entregar. Los arreglos de las prendas hechas aquí no se cobran nunca.</p>
+      </div>
+      <figure class="precios__foto" data-mascara data-cursor="Foto de archivo">
+        <img src="assets/fotos/hilo-1600.jpg" srcset="assets/fotos/hilo-800.jpg 800w, assets/fotos/hilo-1600.jpg 1600w" sizes="(max-width: 900px) 92vw, 36vw" width="1600" height="2400" loading="lazy" alt="Carretes de hilo sobre una máquina de coser de taller">
+        <figcaption>Foto de archivo.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ 07 · EL TALLER ============ -->
+  <section class="taller seccion" id="taller">
+    <p class="seccion__indice"><span>06</span> El taller</p>
+    <div class="taller__rejilla">
+      <div class="taller__texto">
+        <h2 class="titular" data-reveal>Dos personas y una mesa de corte</h2>
+        <p>El taller lo llevan <strong>Amador Vilariño</strong>, que corta y prueba, y <strong>Nuria Pardo</strong>, que hace pantalones y chalecos. Abrieron en 2006 en un primer piso de la Rúa dos Ferreiros, encima de donde estaba la mercería.</p>
+        <p>No hay tienda: hay una mesa de corte, dos máquinas y un espejo. Se viene con cita, porque si estamos probando no se puede atender a nadie más.</p>
+
+        <p class="estado" id="estado"><span class="estado__punto" aria-hidden="true"></span><span id="estadoTexto">Comprobando el horario…</span></p>
+
+        <table class="horario">
+          <caption class="visualmente-oculto">Horario del taller</caption>
+          <tbody id="horarioCuerpo">
+            <tr><th scope="row">Lunes</th><td>Cerrado</td></tr>
+            <tr><th scope="row">Martes</th><td>10:00 – 14:00 · 16:30 – 20:00</td></tr>
+            <tr><th scope="row">Miércoles</th><td>10:00 – 14:00 · 16:30 – 20:00</td></tr>
+            <tr><th scope="row">Jueves</th><td>10:00 – 14:00 · 16:30 – 20:00</td></tr>
+            <tr><th scope="row">Viernes</th><td>10:00 – 14:00 · 16:30 – 20:00</td></tr>
+            <tr><th scope="row">Sábado</th><td>10:00 – 13:30</td></tr>
+            <tr><th scope="row">Domingo</th><td>Cerrado</td></tr>
+          </tbody>
+        </table>
+
+        <ul class="taller__datos">
+          <li><span>Teléfono</span><a href="tel:+34981000031">981 00 00 31</a></li>
+          <li><span>WhatsApp</span><a href="https://wa.me/34600000031" rel="noopener">600 00 00 31</a></li>
+          <li><span>Correo</span><a href="mailto:taller@sastreriaarume.example">taller@sastreriaarume.example</a></li>
+          <li><span>Dónde</span>Rúa dos Ferreiros, 9 · 1.º · 15300 Betanzos (A Coruña)</li>
+          <li><span>Titulación</span>Taller de muestra, sin títulos ni premios publicados</li>
+        </ul>
+
+        <div class="voces">
+          <h3>Del libro de encargos</h3>
+          <p class="voces__aviso">Notas de muestra, escritas para esta demostración. No proceden de ninguna plataforma ni de ningún cliente real.</p>
+          <blockquote><p>«Me enseñó la chaqueta hilvanada en la primera prueba y pensé que me habían estafado. En la tercera entendí por qué se hace así.»</p><footer>Un cliente de Betanzos</footer></blockquote>
+          <blockquote><p>«Me dijo que lo que yo quería era semi-medida y que me iba a costar la mitad. Podía haberme cobrado lo otro y no me habría enterado.»</p><footer>Un cliente de A Coruña</footer></blockquote>
+        </div>
+      </div>
+
+      <div class="taller__lado">
+        <div class="taller__mapa">
+          <div class="mapa-consent" id="mapaConsent">
+            <svg class="mapa-consent__dibujo" viewBox="0 0 300 170" aria-hidden="true" focusable="false">
+              <path d="M10 140c60-10 70-56 130-56s90 40 150 28" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="7 6" opacity=".45"></path>
+              <path d="M10 108c60-10 70-42 130-42s90 30 150 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="7 6" opacity=".3"></path>
+              <path d="M138 44h30v34h-30zM188 56h44v24h-44z" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".4"></path>
+              <path d="M146 96 L166 78" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path>
+              <circle cx="166" cy="78" r="3.4" fill="none" stroke="currentColor" stroke-width="2"></circle>
+            </svg>
+            <p>El mapa lo carga Google y pone cookies suyas. Solo aparece si lo pides tú.</p>
+            <button class="boton boton--linea" type="button" id="mapaBoton">Cargar el mapa de Google</button>
+          </div>
+        </div>
+        <div class="taller__cita">
+          <h3>Cómo se empieza</h3>
+          <ol>
+            <li>Una primera cita de una hora, sin compromiso: se habla del uso, se ven tejidos y se toman las veintidós medidas.</li>
+            <li>Se da un precio cerrado con el tejido elegido y una fecha.</li>
+            <li>Se paga la mitad al cortar y la otra mitad al entregar.</li>
+          </ol>
+          <p>Si después de la primera cita no quieres seguir, no se cobra nada.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pie" id="pie">
+  <div class="pie__rejilla">
+    <div class="pie__marca">
+      <svg class="marca__icono" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+        <path d="M6 32 L30 8" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"></path>
+        <circle cx="30" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2.2"></circle>
+        <path d="M8 22c6 4 10-2 16 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="3 3"></path>
+      </svg>
+      <p class="pie__nombre">Sastrería Arume</p>
+      <p class="pie__lema">Traje a medida con taller propio en Betanzos, desde 2006.</p>
+    </div>
+    <div class="pie__bloque">
+      <h2>Dónde</h2>
+      <p>Rúa dos Ferreiros, 9 · 1.º<br>15300 Betanzos · A Coruña</p>
+      <p><a href="tel:+34981000031">981 00 00 31</a><br><a href="mailto:taller@sastreriaarume.example">taller@sastreriaarume.example</a></p>
+    </div>
+    <div class="pie__bloque">
+      <h2>Citas</h2>
+      <p>Martes a viernes<br>10:00 – 14:00 y 16:30 – 20:00<br>Sábado de 10:00 a 13:30<br>Siempre con cita previa</p>
+    </div>
+    <div class="pie__bloque">
+      <h2>Legal</h2>
+      <ul>
+        <li><a href="aviso-legal.html">Aviso legal</a></li>
+        <li><a href="privacidad.html">Privacidad y cookies</a></li>
+        <li><a href="#inicio">Volver arriba</a></li>
+      </ul>
+    </div>
+  </div>
+  <p class="pie__demo"><strong>Sitio de demostración.</strong> Sastrería Arume es un taller ficticio; las personas, los precios, los plazos, las fotografías y las opiniones son de muestra. No se publica ninguna titulación, escuela, premio ni taller de paso, porque no se inventan.</p>
+  <p class="pie__creditos">Fotografías de archivo con licencia Pexels, acreditadas en <code>CREDITOS.md</code>. Las dos caras de la chaqueta, la aguja del logotipo, los cuadrados de las horas y la 404 están dibujados para esta plantilla.</p>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner" hidden role="dialog" aria-labelledby="cookieTitulo" aria-describedby="cookieTexto">
+  <div class="cookie-banner__texto">
+    <h2 id="cookieTitulo">Sobre las cookies</h2>
+    <p id="cookieTexto">Esta web no usa cookies de seguimiento ni analítica. Solo guardamos en tu navegador que ya has visto este aviso. El mapa de Google únicamente se carga si pulsas el botón.</p>
+  </div>
+  <div class="cookie-banner__acciones">
+    <a class="cookie-banner__mas" href="privacidad.html">Más detalle</a>
+    <button class="boton boton--burdeos" type="button" id="cookieAceptar">Entendido</button>
+  </div>
+</div>
+
+<div class="cursor" id="cursor" aria-hidden="true">
+  <span class="cursor__forma"></span>
+  <span class="cursor__texto" id="cursorTexto"></span>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

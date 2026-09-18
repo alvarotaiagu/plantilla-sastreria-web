@@ -1,0 +1,610 @@
+/* ==========================================================================
+   Sastrería Arume — traje a medida (demostración, negocio ficticio)
+   Concepto: «El revés». Lo que se ve de una chaqueta es la mitad; la otra
+   mitad está por dentro. La prenda se gira de verdad y enseña el forro, la
+   entretela, la hombrera y los ojales a mano.
+
+   CONTRASTE: ningún texto se apaga con opacity. Cada tono apagado es un token
+   de color calculado con script (fórmula WCAG) contra el PEOR de los fondos en
+   los que aparece; el valor va anotado al lado.
+   ========================================================================== */
+
+:root {
+  /* --- fondos --- */
+  --fondo: #efe9e1;   /* hueso */
+  --panel: #e1d9cd;   /* el fondo más oscuro donde hay texto pequeño */
+  --crema: #fbf8f4;   /* tarjetas */
+  --tinta: #2b2622;   /* marrón muy oscuro: texto principal, pie y cortina */
+
+  /* --- texto --- */
+  --tinta-media: #5d554c;  /* 5,23 sobre --panel */
+  --tinta-suave: #645d51;  /* 4,65 sobre --panel · 5,40 fondo · 6,15 crema */
+  --crema-suave: #b9a88f;  /* 6,46 sobre --tinta */
+
+  /* --- marca --- */
+  /* El burdeos es el único color de marca de mis plantillas que pasa AA como
+     texto sin tener que derivarle una variante: 6,63 sobre el panel. Aun así
+     lleva su versión clara para el fondo oscuro del pie. */
+  --burdeos: #7d2b32;        /* 6,63 panel · 7,69 fondo · 8,76 crema */
+  --burdeos-claro: #d4838a;  /* 5,28 sobre --tinta */
+  --forro: #6b4f3a;          /* color del forro dibujado: relleno, no texto */
+
+  --titulo: "EB Garamond", Georgia, "Times New Roman", serif;
+  --texto: "Inter Tight", "Segoe UI", system-ui, sans-serif;
+
+  --ancho: 1220px;
+  --radio: 2px;
+  --sombra: 0 20px 46px -30px rgba(43, 38, 34, .55);
+  --curva: cubic-bezier(.22, .61, .36, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { overflow-x: clip; scroll-behavior: smooth; }
+html.lenis { scroll-behavior: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto; }
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--tinta);
+  font-family: var(--texto);
+  font-size: clamp(1rem, .96rem + .2vw, 1.08rem);
+  line-height: 1.68;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+img, svg { max-width: 100%; }
+img { display: block; height: auto; }
+
+h1, h2, h3 { font-family: var(--titulo); font-weight: 500; line-height: 1.1; margin: 0 0 .6em; }
+p { margin: 0 0 1.1em; }
+a { color: inherit; }
+
+::selection { background: var(--burdeos); color: var(--crema); }
+:focus-visible { outline: 3px solid var(--burdeos); outline-offset: 3px; border-radius: 2px; }
+
+.visualmente-oculto {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.saltar {
+  position: absolute; left: 1rem; top: -100px; z-index: 300;
+  background: var(--tinta); color: var(--crema);
+  padding: .8rem 1.2rem; border-radius: var(--radio);
+  text-decoration: none; font-size: .9rem;
+  transition: top .2s var(--curva);
+}
+.saltar:focus { top: 1rem; }
+
+/* ====================== cortina de entrada ======================
+   Gesto propio del concepto: se cose una puntada, la aguja la remata y la
+   cortina se levanta POR LA COSTURA, con el borde de abajo curvado como el
+   hilo. Retirada garantizada: sin GSAP y con movimiento reducido el JS le
+   pone display:none en cuanto arranca. */
+@property --curva-cortina {
+  syntax: "<number>";
+  initial-value: 0;
+  inherits: false;
+}
+.cortina {
+  position: fixed; inset: 0; z-index: 400;
+  background: var(--tinta);
+  display: grid; place-items: center;
+  transform-origin: 50% 0%;
+  border-bottom-left-radius: 50% calc(var(--curva-cortina, 0) * 13vh);
+  border-bottom-right-radius: 50% calc(var(--curva-cortina, 0) * 13vh);
+}
+html:not(.has-motion) .cortina { display: none; }
+.cortina.fuera { opacity: 0; visibility: hidden; transition: opacity .5s var(--curva), visibility .5s; }
+.cortina__caja { text-align: center; }
+.cortina__aguja { width: 190px; height: auto; color: var(--burdeos-claro); }
+.cortina__hilo {
+  fill: none; stroke: var(--burdeos-claro); stroke-width: 2.4;
+  stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1;
+}
+.cortina__punta { stroke: var(--crema-suave); stroke-width: 2.4; opacity: 0; }
+.cortina__punta circle { stroke: var(--crema-suave); }
+.cortina__palabra {
+  display: block; margin-top: 1rem;
+  font-family: var(--titulo); font-size: 1.5rem;
+  letter-spacing: .3em; text-transform: uppercase;
+  color: var(--crema-suave);           /* 6,46 sobre --tinta */
+}
+/* la costura que remata el borde de abajo antes de que suba la cortina */
+.cortina__costura {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  width: 100%; height: 60px;
+  clip-path: inset(0 100% 0 0);
+}
+.cortina.enhebrada .cortina__punta { opacity: 1; transition: opacity .45s var(--curva); }
+.cortina.cosida .cortina__costura { clip-path: inset(0 0 0 0); transition: clip-path .85s cubic-bezier(.4, 0, .2, 1); }
+.cortina__costura path {
+  fill: none; stroke: var(--crema-suave); stroke-width: 2;
+  stroke-dasharray: 9 8; stroke-linecap: round;
+}
+
+/* ====================== cabecera ====================== */
+.cabecera {
+  position: fixed; inset: 0 0 auto; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 1rem clamp(1rem, 4vw, 2.6rem);
+  background: color-mix(in srgb, var(--fondo) 88%, transparent);
+  backdrop-filter: blur(9px);
+  border-bottom: 1px solid transparent;
+  transition: border-color .3s var(--curva), padding .3s var(--curva);
+}
+@supports not (background: color-mix(in srgb, red 50%, blue)) { .cabecera { background: var(--fondo); } }
+.cabecera.encogida { padding-top: .55rem; padding-bottom: .55rem; border-bottom-color: rgba(43, 38, 34, .16); }
+
+.marca { display: flex; align-items: center; gap: .7rem; text-decoration: none; }
+.marca__icono { width: 30px; height: 30px; color: var(--burdeos); flex: none; }
+.marca__nombre { display: block; font-family: var(--titulo); font-size: 1.18rem; }
+.marca__bajada { display: block; font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; color: var(--tinta-suave); }
+
+.nav { display: flex; align-items: center; gap: clamp(1rem, 2.4vw, 2rem); }
+.nav__lista { display: flex; gap: clamp(.9rem, 1.8vw, 1.6rem); list-style: none; margin: 0; padding: 0; }
+.nav__lista a {
+  text-decoration: none; font-size: .88rem;
+  padding-bottom: 3px; border-bottom: 1px solid transparent;
+  transition: border-color .25s var(--curva), color .25s var(--curva);
+}
+.nav__lista a:hover { border-bottom-color: var(--burdeos); color: var(--burdeos); }
+
+.hamburguesa {
+  display: none; position: relative; z-index: 120;
+  align-items: center; gap: .55rem;
+  background: none; border: 0; cursor: pointer;
+  font-family: var(--texto); font-size: .78rem; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--tinta); padding: .4rem;
+}
+.hamburguesa__caja { display: grid; gap: 5px; width: 24px; }
+.hamburguesa__caja i { display: block; height: 2px; background: currentColor; transition: transform .3s var(--curva); }
+.hamburguesa[aria-expanded="true"] .hamburguesa__caja i:first-child { transform: translateY(3.5px) rotate(45deg); }
+.hamburguesa[aria-expanded="true"] .hamburguesa__caja i:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+
+/* ====================== botones ====================== */
+.boton {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: .5rem; padding: .78rem 1.5rem;
+  font-size: .88rem; text-decoration: none;
+  border-radius: 999px; border: 1px solid transparent;
+  cursor: pointer; font-family: var(--texto);
+  transition: transform .3s var(--curva), background .25s var(--curva), color .25s var(--curva);
+}
+.boton--burdeos { background: var(--burdeos); color: var(--crema); }   /* 8,76 */
+.boton--burdeos:hover { background: var(--tinta); }
+.boton--linea { border-color: rgba(43, 38, 34, .35); color: var(--tinta); background: none; }
+.boton--linea:hover { border-color: var(--burdeos); color: var(--burdeos); }
+
+/* ====================== hero ====================== */
+.hero {
+  min-height: 100svh;
+  display: grid; align-items: center;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  max-width: var(--ancho); margin: 0 auto;
+  padding: clamp(7rem, 14vh, 10rem) clamp(1.1rem, 4vw, 2.6rem) clamp(3rem, 8vh, 5rem);
+}
+.hero__sobre { font-size: .68rem; letter-spacing: .26em; text-transform: uppercase; color: var(--tinta-suave); margin-bottom: 1.4rem; }
+.hero__titular { font-size: clamp(2.4rem, 1.2rem + 4.6vw, 4.6rem); line-height: 1.02; letter-spacing: -.01em; margin-bottom: 1.4rem; }
+.hero__titular .palabra, .titular .palabra {
+  display: inline-block; white-space: nowrap; overflow: hidden;
+  vertical-align: bottom; padding-bottom: .16em; margin-bottom: -.12em;
+}
+.hero__titular .letra, .titular .letra { display: inline-block; }
+html.has-motion .hero__titular .letra, html.has-motion .titular .letra { transform: translateY(110%); }
+
+.hero__entrada { max-width: 50ch; color: var(--tinta-media); }
+.hero__acciones { display: flex; flex-wrap: wrap; gap: .8rem; margin: 1.8rem 0 2.6rem; }
+.hero__datos { display: flex; flex-wrap: wrap; gap: clamp(1.4rem, 4vw, 3rem); margin: 0; }
+.hero__datos dt { font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; color: var(--tinta-suave); }
+.hero__datos dd {
+  margin: .2rem 0 0; font-family: var(--titulo);
+  font-size: clamp(1.8rem, 1.2rem + 1.5vw, 2.6rem); line-height: 1;
+  color: var(--burdeos);
+}
+.hero__prenda { margin: 0; text-align: center; }
+.hero__prenda figcaption { font-size: .8rem; color: var(--tinta-suave); margin-top: 1rem; max-width: 34ch; margin-inline: auto; }
+
+/* ====================== la chaqueta dibujada ====================== */
+.ch-cuerpo { fill: var(--panel); stroke: var(--tinta); stroke-width: 2.4; stroke-linejoin: round; }
+.ch-manga { fill: var(--panel); stroke: var(--tinta); stroke-width: 2.4; stroke-linejoin: round; }
+.ch-solapa { fill: var(--crema); stroke: var(--tinta); stroke-width: 2.2; stroke-linejoin: round; }
+.ch-cuello { fill: var(--tinta); }
+.ch-costura { stroke: var(--tinta); stroke-width: 2; stroke-linecap: round; }
+.ch-boton { fill: var(--tinta); }
+.chaqueta--hero { width: min(100%, 320px); height: auto; }
+
+/* el revés */
+.ch-forro { fill: var(--forro); stroke: var(--tinta); stroke-width: 2.4; stroke-linejoin: round; }
+.ch-manga--forro { fill: var(--forro); stroke: var(--tinta); stroke-width: 2.4; }
+.ch-entretela { fill: url(#tramaEntretela); stroke: var(--crema); stroke-width: 1.6; }
+.ch-hombrera { fill: none; stroke: var(--crema); stroke-width: 6; stroke-linecap: round; }
+.ch-sisa { fill: none; stroke: var(--crema-suave); stroke-width: 2; stroke-dasharray: 7 6; }
+.ch-bolsillo { fill: var(--tinta); }
+.ch-pespunte { stroke: var(--crema-suave); stroke-width: 1.6; stroke-dasharray: 5 4; }
+.ch-ojal { stroke: var(--burdeos-claro); stroke-width: 4; stroke-linecap: round; }
+.ch-ojal-ojo { fill: none; stroke: var(--burdeos-claro); stroke-width: 2; }
+.ch-bajo { stroke: var(--crema-suave); stroke-width: 2.4; stroke-dasharray: 8 7; stroke-linecap: round; }
+
+.ch-numeros circle { fill: var(--crema); stroke: var(--tinta); stroke-width: 1.6; }
+.ch-numeros text {
+  fill: var(--tinta); font-family: "Inter Tight", sans-serif;
+  font-size: 12px; font-weight: 600; text-anchor: middle;
+}
+/* resaltado cruzado entre la lista y el dibujo */
+.pieza, .ch-numeros .num { transition: opacity .3s var(--curva); }
+.chaqueta--reves[data-activa] .pieza { opacity: .28; }
+.chaqueta--reves[data-activa] .ch-numeros .num { opacity: .35; }
+.chaqueta--reves[data-activa="1"] .pieza--1,
+.chaqueta--reves[data-activa="2"] .pieza--2,
+.chaqueta--reves[data-activa="3"] .pieza--3,
+.chaqueta--reves[data-activa="4"] .pieza--4,
+.chaqueta--reves[data-activa="5"] .pieza--5,
+.chaqueta--reves[data-activa="6"] .pieza--6 { opacity: 1; }
+.chaqueta--reves[data-activa="1"] .num--1,
+.chaqueta--reves[data-activa="2"] .num--2,
+.chaqueta--reves[data-activa="3"] .num--3,
+.chaqueta--reves[data-activa="4"] .num--4,
+.chaqueta--reves[data-activa="5"] .num--5,
+.chaqueta--reves[data-activa="6"] .num--6 { opacity: 1; }
+.chaqueta--reves[data-activa="1"] .num--1 circle,
+.chaqueta--reves[data-activa="2"] .num--2 circle,
+.chaqueta--reves[data-activa="3"] .num--3 circle,
+.chaqueta--reves[data-activa="4"] .num--4 circle,
+.chaqueta--reves[data-activa="5"] .num--5 circle,
+.chaqueta--reves[data-activa="6"] .num--6 circle { fill: var(--burdeos); stroke: var(--crema); }
+.chaqueta--reves[data-activa="1"] .num--1 text,
+.chaqueta--reves[data-activa="2"] .num--2 text,
+.chaqueta--reves[data-activa="3"] .num--3 text,
+.chaqueta--reves[data-activa="4"] .num--4 text,
+.chaqueta--reves[data-activa="5"] .num--5 text,
+.chaqueta--reves[data-activa="6"] .num--6 text { fill: var(--crema); }
+
+/* ====================== cinta ====================== */
+.cinta {
+  border-top: 1px solid rgba(43, 38, 34, .16);
+  border-bottom: 1px solid rgba(43, 38, 34, .16);
+  background: var(--panel);
+  overflow: hidden; padding: .85rem 0;
+}
+.cinta__pista {
+  display: flex; gap: 2.2rem; width: max-content;
+  font-size: .76rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--tinta-media); white-space: nowrap;
+}
+.cinta__pista i { color: var(--burdeos); font-style: normal; }
+
+/* ====================== secciones ====================== */
+.seccion { max-width: var(--ancho); margin: 0 auto; padding: clamp(4.5rem, 11vh, 8rem) clamp(1.1rem, 4vw, 2.6rem); }
+.seccion__indice {
+  display: flex; align-items: center; gap: .8rem;
+  font-size: .68rem; letter-spacing: .26em; text-transform: uppercase;
+  color: var(--tinta-suave); margin-bottom: 1.2rem;
+}
+.seccion__indice span { color: var(--burdeos); font-weight: 600; }
+.seccion__indice::after { content: ""; flex: 1; height: 1px; background: rgba(43, 38, 34, .2); max-width: 120px; }
+
+.titular { font-size: clamp(1.9rem, 1.2rem + 2.2vw, 3rem); max-width: 20ch; letter-spacing: -.005em; }
+.titular--grande { max-width: 16ch; font-size: clamp(2.1rem, 1.2rem + 3vw, 3.5rem); }
+
+/* ====================== 01 · el revés ====================== */
+.reves__entrada { max-width: 60ch; color: var(--tinta-media); margin-bottom: 3rem; }
+.reves__caja {
+  display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  gap: clamp(2rem, 5vw, 4rem); align-items: start;
+}
+.reves__prenda { position: sticky; top: clamp(90px, 12vh, 130px); }
+
+.chaqueta-giro { perspective: 1600px; }
+.chaqueta-giro__eje {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1.15s cubic-bezier(.66, .03, .3, 1);
+  max-width: 340px; margin-inline: auto;
+}
+.chaqueta-giro.volteada .chaqueta-giro__eje { transform: rotateY(180deg); }
+.chaqueta--cara { width: 100%; height: auto; backface-visibility: hidden; }
+.chaqueta--reves {
+  position: absolute; inset: 0; transform: rotateY(180deg);
+  /* el currentColor de la trama de la entretela se resuelve aquí */
+  color: var(--crema-suave);
+}
+
+.reves__mando { display: flex; justify-content: center; gap: .5rem; margin-top: 1.6rem; }
+.reves__boton {
+  font-family: var(--texto); font-size: .84rem;
+  padding: .5rem 1.15rem; border-radius: 999px; cursor: pointer;
+  border: 1px solid rgba(43, 38, 34, .3);
+  background: none; color: var(--tinta);
+  transition: background .25s var(--curva), color .25s var(--curva), border-color .25s var(--curva);
+}
+.reves__boton:hover { border-color: var(--burdeos); color: var(--burdeos); }
+.reves__boton[aria-pressed="true"] { background: var(--burdeos); color: var(--crema); border-color: var(--burdeos); }
+
+.reves__estado {
+  font-size: .95rem; color: var(--tinta-media);
+  padding-bottom: 1.2rem; margin-bottom: 1.4rem;
+  border-bottom: 1px solid rgba(43, 38, 34, .18);
+}
+.reves__estado b { color: var(--tinta); }
+
+.piezas { list-style: none; margin: 0; padding: 0; display: grid; gap: .4rem; counter-reset: pieza; }
+.piezas li {
+  padding: 1rem 1.1rem;
+  border: 1px solid transparent; border-radius: var(--radio);
+  transition: background .3s var(--curva), border-color .3s var(--curva);
+}
+.piezas li.activa { background: var(--crema); border-color: rgba(43, 38, 34, .16); }
+.piezas li:focus-visible { outline: 3px solid var(--burdeos); outline-offset: 2px; }
+.piezas b { display: flex; align-items: center; gap: .7rem; font-family: var(--titulo); font-weight: 500; font-size: 1.16rem; margin-bottom: .2rem; }
+.piezas__num {
+  flex: none; width: 24px; height: 24px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-family: var(--texto); font-size: .76rem; font-weight: 600;
+  background: var(--panel); color: var(--tinta);
+  transition: background .3s var(--curva), color .3s var(--curva);
+}
+.piezas li.activa .piezas__num { background: var(--burdeos); color: var(--crema); }
+.piezas span { display: block; font-size: .95rem; color: var(--tinta-media); }
+.piezas strong { color: var(--tinta); font-weight: 600; }
+
+/* ====================== 02 · sesenta horas ====================== */
+.horas, .claro { position: relative; z-index: 0; }
+/* el fondo va a sangre en un ::before porque la sección lleva también la clase
+   que limita el ancho. 100vw es seguro con overflow-x: clip en html. */
+.horas::before, .claro::before {
+  content: ""; position: absolute; top: 0; bottom: 0;
+  left: 50%; width: 100vw; margin-left: -50vw; z-index: -1;
+  border-block: 1px solid rgba(43, 38, 34, .14);
+}
+.horas::before { background: var(--panel); }
+.claro::before { background: var(--crema); }
+
+.horas__entrada { max-width: 58ch; color: var(--tinta-media); }
+.tareas { list-style: none; margin: 2.4rem 0 1.6rem; padding: 0; display: grid; gap: .1rem; }
+.tareas li {
+  display: grid; grid-template-columns: 190px 1fr auto;
+  align-items: center; gap: 1.2rem;
+  padding: .55rem 0;
+  border-bottom: 1px solid rgba(43, 38, 34, .1);
+}
+.tareas b { font-family: var(--titulo); font-weight: 500; font-size: 1.05rem; }
+.tareas em { font-style: normal; font-family: var(--titulo); font-size: 1.05rem; color: var(--burdeos); }
+.cuadros { display: flex; flex-wrap: wrap; gap: 4px; }
+.cuadros i {
+  display: block; width: 15px; height: 15px;
+  background: var(--burdeos); border-radius: 1px;
+}
+html.has-motion .cuadros i { transform: scale(0); }
+html.has-motion .visible .cuadros i { transform: scale(1); transition: transform .4s cubic-bezier(.34, 1.56, .64, 1); }
+.horas__total { font-family: var(--titulo); font-size: clamp(1.1rem, 1rem + .5vw, 1.4rem); }
+.horas__total .contador { color: var(--burdeos); }
+.horas__total strong { color: var(--burdeos); font-weight: 500; }
+
+/* ====================== 03 · las pruebas ====================== */
+.pruebas__rejilla, .claro__rejilla, .precios__rejilla, .taller__rejilla {
+  display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+  gap: clamp(1.8rem, 5vw, 4rem); align-items: start;
+}
+.pruebas__lista { list-style: none; margin: 1.8rem 0 1.4rem; padding: 0; display: grid; gap: 1.6rem; }
+.pruebas__lista li { position: relative; padding-left: 1.8rem; }
+.pruebas__lista li::before {
+  content: ""; position: absolute; left: 0; top: .55rem; bottom: -1.6rem;
+  width: 2px; background: var(--burdeos); opacity: .35;
+}
+.pruebas__lista li:last-child::before { bottom: auto; height: 1.2rem; }
+.pruebas__lista li::after {
+  content: ""; position: absolute; left: -4px; top: .5rem;
+  width: 10px; height: 10px; border-radius: 50%; background: var(--burdeos);
+}
+.pruebas__num { display: block; font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; color: var(--tinta-suave); }
+.pruebas__lista b { display: block; font-family: var(--titulo); font-weight: 500; font-size: 1.3rem; margin: .1rem 0 .3rem; }
+.pruebas__lista p { font-size: .95rem; color: var(--tinta-media); margin: 0; max-width: 52ch; }
+.pruebas__nota, .precios__nota { max-width: 58ch; font-size: .93rem; color: var(--tinta-suave); }
+
+/* ====================== 04 · sin rodeos ====================== */
+.claro__fuerte {
+  font-family: var(--titulo); font-size: clamp(1.05rem, 1rem + .4vw, 1.28rem);
+  color: var(--tinta); max-width: 52ch;
+  border-left: 3px solid var(--burdeos); padding-left: 1.2rem;
+}
+.claro__lista { list-style: none; margin: 1.8rem 0 0; padding: 0; display: grid; gap: 1.1rem; }
+.claro__lista li { position: relative; padding-left: 1.7rem; }
+.claro__lista li::before {
+  content: ""; position: absolute; left: 0; top: .78rem;
+  width: 11px; height: 2px; background: var(--burdeos);
+}
+.claro__lista b { display: block; font-family: var(--titulo); font-weight: 500; font-size: 1.08rem; }
+.claro__lista span { font-size: .95rem; color: var(--tinta-media); }
+
+figure[data-mascara] { margin: 0; }
+figure[data-mascara] img { width: 100%; border-radius: var(--radio); clip-path: inset(0 0 0 0); }
+html.has-motion figure[data-mascara] img { clip-path: inset(0 0 100% 0); transition: clip-path 1.2s var(--curva); }
+html.has-motion figure[data-mascara].visible img { clip-path: inset(0 0 0 0); }
+figure[data-mascara] figcaption { font-size: .78rem; color: var(--tinta-suave); margin-top: .7rem; }
+
+/* ====================== 05 · precios ====================== */
+.tabla { width: 100%; border-collapse: collapse; margin: 1.4rem 0 1rem; }
+.tabla th, .tabla td { text-align: left; padding: .8rem .6rem; border-bottom: 1px solid rgba(43, 38, 34, .16); }
+.tabla thead th {
+  font-size: .62rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--tinta-suave); font-weight: 500; border-bottom-color: rgba(43, 38, 34, .3);
+}
+.tabla tbody th { font-weight: 500; font-family: var(--titulo); font-size: 1.08rem; }
+.tabla td:last-child { text-align: right; font-family: var(--titulo); color: var(--burdeos); }
+.tabla td:nth-child(2) { color: var(--tinta-media); font-size: .9rem; }
+
+/* ====================== 06 · el taller ====================== */
+.taller__texto p { color: var(--tinta-media); max-width: 52ch; }
+.taller__texto strong { color: var(--tinta); font-weight: 600; }
+
+.estado { display: inline-flex; align-items: center; gap: .6rem; font-size: .92rem; margin: .4rem 0 1.4rem; }
+.estado__punto { width: 9px; height: 9px; border-radius: 50%; background: var(--tinta-suave); flex: none; }
+.estado.abierto .estado__punto { background: #2f6b46; }
+.estado.cerrado .estado__punto { background: var(--burdeos); }
+
+.horario { width: 100%; border-collapse: collapse; margin-bottom: 1.6rem; max-width: 470px; }
+.horario th, .horario td { text-align: left; padding: .5rem; border-bottom: 1px solid rgba(43, 38, 34, .14); font-size: .92rem; }
+.horario th { font-weight: 400; color: var(--tinta-media); }
+.horario td { text-align: right; }
+.horario tr.hoy th, .horario tr.hoy td { color: var(--burdeos); font-weight: 600; }
+
+.taller__datos { list-style: none; margin: 0 0 2rem; padding: 0; display: grid; gap: .6rem; }
+.taller__datos li { display: flex; flex-wrap: wrap; gap: .3rem .9rem; font-size: .95rem; }
+.taller__datos span {
+  min-width: 96px; font-size: .62rem; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--tinta-suave); padding-top: .4rem;
+}
+.taller__datos a { color: var(--burdeos); text-decoration: none; border-bottom: 1px solid rgba(125, 43, 50, .4); }
+.taller__datos a:hover { border-bottom-color: currentColor; }
+
+.voces { margin-top: 2.4rem; padding-top: 1.6rem; border-top: 1px solid rgba(43, 38, 34, .16); }
+.voces h3 { font-size: 1.2rem; }
+.voces__aviso { font-size: .82rem; color: var(--tinta-suave); }
+.voces blockquote { margin: 1.2rem 0 0; padding-left: 1.2rem; border-left: 2px solid var(--burdeos); }
+.voces blockquote p { font-family: var(--titulo); font-style: italic; font-size: 1.08rem; color: var(--tinta); margin-bottom: .4rem; }
+.voces footer { font-size: .76rem; letter-spacing: .14em; text-transform: uppercase; color: var(--tinta-suave); }
+
+.taller__lado { display: grid; gap: 1.6rem; }
+.taller__mapa { min-height: 240px; }
+.mapa-consent {
+  height: 100%; min-height: 240px;
+  display: grid; place-items: center; gap: .6rem; text-align: center;
+  padding: 1.6rem; border: 1px dashed rgba(43, 38, 34, .35);
+  border-radius: var(--radio); background: var(--panel);
+  color: var(--tinta-media);
+}
+.mapa-consent__dibujo { width: min(100%, 260px); color: var(--burdeos); }
+.mapa-consent p { font-size: .88rem; margin: 0; max-width: 34ch; }
+.taller__mapa iframe { width: 100%; height: 320px; border: 0; border-radius: var(--radio); }
+
+.taller__cita { background: var(--crema); border: 1px solid rgba(43, 38, 34, .14); border-radius: var(--radio); padding: 1.5rem 1.6rem; }
+.taller__cita h3 { font-size: 1.1rem; }
+.taller__cita ol { margin: 0 0 1rem; padding-left: 1.2rem; display: grid; gap: .5rem; }
+.taller__cita li { font-size: .93rem; color: var(--tinta-media); }
+.taller__cita p { font-size: .88rem; color: var(--tinta-suave); margin: 0; }
+
+/* ====================== pie ====================== */
+.pie { background: var(--tinta); color: var(--crema); padding: clamp(3rem, 8vh, 5rem) clamp(1.1rem, 4vw, 2.6rem) 2.4rem; }
+.pie__rejilla { max-width: var(--ancho); margin: 0 auto; display: grid; gap: clamp(1.6rem, 4vw, 3rem); grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+.pie__marca .marca__icono { width: 34px; height: 34px; color: var(--burdeos-claro); }
+.pie__nombre { font-family: var(--titulo); font-size: 1.35rem; margin: .6rem 0 .3rem; }
+.pie__lema { font-size: .9rem; color: var(--crema-suave); max-width: 30ch; }
+.pie__bloque h2 {
+  font-family: var(--texto); font-size: .64rem; font-weight: 500;
+  letter-spacing: .26em; text-transform: uppercase;
+  color: var(--burdeos-claro); margin-bottom: .8rem;     /* 5,28 sobre --tinta */
+}
+.pie__bloque p, .pie__bloque li { font-size: .92rem; color: var(--crema-suave); }
+.pie__bloque ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .4rem; }
+.pie a { color: var(--crema); text-decoration: none; border-bottom: 1px solid rgba(251, 248, 244, .3); }
+.pie a:hover { color: var(--burdeos-claro); border-color: currentColor; }
+.pie code { color: var(--burdeos-claro); font-size: .9em; }
+.pie__demo, .pie__creditos {
+  max-width: var(--ancho); margin: 2.6rem auto 0;
+  padding-top: 1.4rem; border-top: 1px solid rgba(251, 248, 244, .18);
+  font-size: .82rem; color: var(--crema-suave);
+}
+.pie__creditos { margin-top: .8rem; padding-top: 0; border: 0; }
+.pie__demo strong { color: var(--crema); }
+
+/* ====================== aviso de cookies ====================== */
+.cookie-banner {
+  position: fixed; left: 1rem; right: 1rem; bottom: 1rem; z-index: 260;
+  max-width: 640px; margin-inline: auto;
+  background: var(--tinta); color: var(--crema);
+  border-radius: var(--radio); box-shadow: 0 24px 60px -30px rgba(0, 0, 0, .8);
+  padding: 1.3rem 1.4rem;
+}
+/* El display va en :not([hidden]). Puesto en la clase a secas gana a [hidden]
+   y el botón no cierra nada. */
+.cookie-banner:not([hidden]) { display: grid; gap: 1rem; }
+@media (min-width: 720px) { .cookie-banner:not([hidden]) { grid-template-columns: 1fr auto; align-items: center; } }
+.cookie-banner h2 { font-family: var(--texto); font-size: .68rem; letter-spacing: .24em; text-transform: uppercase; color: var(--burdeos-claro); margin-bottom: .5rem; }
+.cookie-banner p { font-size: .88rem; margin: 0; color: var(--crema-suave); }
+.cookie-banner__acciones { display: flex; align-items: center; gap: 1rem; }
+.cookie-banner__mas { color: var(--crema); font-size: .85rem; }
+
+/* ====================== cursor ====================== */
+.cursor {
+  position: fixed; top: 0; left: 0; z-index: 280;
+  pointer-events: none; opacity: 0;
+  transform: translate(-50%, -50%);
+  display: grid; place-items: center;
+  transition: opacity .3s var(--curva);
+}
+.cursor.activo { opacity: 1; }
+.cursor__forma { width: 12px; height: 12px; border-radius: 50%; background: var(--burdeos); transition: width .35s var(--curva), height .35s var(--curva), background .35s var(--curva); }
+.cursor__texto { position: absolute; font-size: .64rem; letter-spacing: .16em; text-transform: uppercase; color: var(--crema); opacity: 0; transition: opacity .25s var(--curva); white-space: nowrap; }
+.cursor.etiqueta .cursor__forma { width: 84px; height: 84px; background: rgba(43, 38, 34, .82); }
+.cursor.etiqueta .cursor__texto { opacity: 1; }
+@media (hover: none), (pointer: coarse) { .cursor { display: none; } }
+
+/* ====================== páginas de texto ====================== */
+.pagina-texto { max-width: 760px; margin: 0 auto; padding: clamp(8rem, 18vh, 11rem) clamp(1.1rem, 4vw, 2.6rem) clamp(4rem, 10vh, 7rem); }
+.pagina-texto h1 { font-size: clamp(2rem, 1.4rem + 2.4vw, 3rem); }
+.pagina-texto h2 { font-size: 1.4rem; margin-top: 2.4rem; }
+.pagina-texto p, .pagina-texto li { color: var(--tinta-media); }
+.pagina-texto a { color: var(--burdeos); }
+.pagina-texto .sobre { font-size: .68rem; letter-spacing: .26em; text-transform: uppercase; color: var(--tinta-suave); }
+.pagina-texto .aviso { background: var(--panel); border-left: 3px solid var(--burdeos); padding: 1.2rem 1.4rem; border-radius: var(--radio); margin: 2rem 0; }
+.pagina-texto .aviso p:last-child { margin-bottom: 0; }
+
+.error-404 { min-height: 100svh; display: grid; place-items: center; text-align: center; padding: 6rem 1.2rem 4rem; }
+.error-404 .chaqueta { width: min(64vw, 230px); height: auto; margin: 0 auto 2rem; }
+.error-404 h1 { font-size: clamp(2rem, 1.4rem + 3vw, 3.2rem); }
+.error-404 p { color: var(--tinta-media); max-width: 46ch; margin-inline: auto; }
+
+/* ====================== responsive ====================== */
+@media (max-width: 1000px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero__prenda { order: -1; }
+  .chaqueta--hero { width: min(52vw, 215px); }
+  .reves__caja { grid-template-columns: 1fr; }
+  .reves__prenda { position: static; }
+  .pruebas__rejilla, .claro__rejilla, .precios__rejilla, .taller__rejilla { grid-template-columns: 1fr; }
+}
+@media (max-width: 860px) {
+  .hamburguesa { display: inline-flex; }
+  .nav {
+    position: fixed; inset: 0 0 auto; z-index: 110;
+    flex-direction: column; align-items: flex-start; justify-content: center;
+    gap: 1.6rem; padding: 6rem clamp(1.4rem, 6vw, 3rem) 3rem;
+    background: var(--fondo);
+    transform: translateY(-101%);
+    transition: transform .5s var(--curva);
+    box-shadow: 0 30px 60px -40px rgba(43, 38, 34, .9);
+  }
+  .nav.abierta { transform: translateY(0); }
+  .nav__lista { flex-direction: column; gap: 1rem; }
+  .nav__lista a { font-size: 1.3rem; font-family: var(--titulo); }
+  .tareas li { grid-template-columns: 150px 1fr auto; gap: .8rem; }
+  .tareas b { font-size: .94rem; }
+}
+@media (max-width: 620px) {
+  .hamburguesa__texto { display: none; }
+  .tareas li { grid-template-columns: 1fr auto; row-gap: .3rem; }
+  .tareas .cuadros { grid-column: 1 / -1; }
+  .hero__datos { gap: 1.2rem; }
+}
+
+/* ====================== movimiento reducido ====================== */
+/* Se apaga el MOVIMIENTO, no el CONTENIDO: la chaqueta sigue girando de cara
+   (sin transición), los cuadrados de las horas siguen estando y las fotos
+   siguen destapadas. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  .cursor { display: none; }
+  html.has-motion .hero__titular .letra, html.has-motion .titular .letra { transform: none; }
+  html.has-motion figure[data-mascara] img { clip-path: inset(0 0 0 0); }
+  html.has-motion .cuadros i { transform: scale(1); }
+}
